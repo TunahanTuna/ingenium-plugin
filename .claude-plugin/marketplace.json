@@ -1,0 +1,20 @@
+{
+  "name": "ingenium",
+  "description": "Ingenium — a developer's Swiss Army knife for Claude Code. Layered workflow, web and game development skills that make AI-assisted development safe, optimal and fast. Bilingual (EN/TR) triggers.",
+  "owner": {
+    "name": "Tunahan",
+    "email": "tunahan@dekatechs.com"
+  },
+  "plugins": [
+    {
+      "name": "ingenium",
+      "description": "The full Ingenium toolkit in a single plugin. Workflow: safe-merge, refactor-safe, release-prep, debug-detective. Project: project-onboard, docs-sync, web-kickoff. Frontend craft: frontend-craft, perf-audit, motion-craft, design-system, human-made-design, pwa-offline. Game dev: game-design, pixel-game-dev, godot-dev, tauri-game-dev, multiplayer-netcode, shader-vfx, game-audio. All skills respond to both Turkish and English prompts.",
+      "category": "development",
+      "source": "./plugins/ingenium",
+      "author": {
+        "name": "Tunahan"
+      },
+      "tags": ["workflow", "git", "web", "gamedev", "developer-toolkit"]
+    }
+  ]
+}

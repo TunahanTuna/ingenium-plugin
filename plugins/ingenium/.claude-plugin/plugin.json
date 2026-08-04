@@ -1,0 +1,33 @@
+{
+  "name": "ingenium",
+  "description": "Developer Swiss Army knife for frontend and game developers: safe merging, safe refactoring, systematic debugging, docs sync, AI-ready onboarding, release prep, web kickoff, frontend fundamentals, performance auditing, motion engineering, design systems, human-made (anti-generic) design, PWA/offline, game design, pixel-art web games, Godot 4, Tauri desktop games, multiplayer netcode, shaders/VFX and game audio. Bilingual (EN/TR) triggers.",
+  "author": {
+    "name": "Tunahan"
+  },
+  "keywords": [
+    "workflow",
+    "git",
+    "merge",
+    "refactoring",
+    "debugging",
+    "documentation",
+    "release",
+    "web",
+    "performance",
+    "animation",
+    "design-system",
+    "gamedev",
+    "game-design",
+    "pixel-art",
+    "phaser",
+    "godot",
+    "tauri",
+    "multiplayer",
+    "netcode",
+    "shaders",
+    "game-audio",
+    "pwa",
+    "offline-first",
+    "ui-design"
+  ]
+}
