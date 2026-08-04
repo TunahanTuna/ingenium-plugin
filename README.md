@@ -48,6 +48,7 @@ Lokal kurulum (geliştirme için):
 | Skill | Ne yapar | Örnek komut |
 |---|---|---|
 | `frontend-craft` | Framework'ten bağımsız frontend temelleri: semantik HTML, formlar, modern CSS, URL-as-state, üç-durum kuralı, platform-first bağımlılık disiplini + AI ile token-verimli kod tabanı | "frontend'de en doğru yöntem hangisi", "kodu ai için optimize et" |
+| `ui-ux-design` | Uçtan uca UI/UX tasarım metodolojisi (React/Vue/oyun motoru bağımsız): tasarım sırası (anla→kurgula→yerleştir→işle→doğrula), hiyerarşi mekaniği, yüzey reçeteleri (tablo, form, dashboard, boş durum, oyun HUD/menü), etkileşim kuralları, doğrulama checklist'i | "bu sayfaya güzel bir tablo tasarla", "hud tasarımı yap" |
 | `perf-audit` | Ölçüm öncelikli web performans denetimi: Core Web Vitals teşhisi, bundle diyeti, asset/caching stratejisi, runtime jank avı | "site yavaş, performans denetimi yap" |
 | `motion-craft` | Animasyon ve micro-interaction mühendisliği: doğru araç seçimi, süre/easing, FLIP, koreografi, 60fps disiplini, reduced-motion | "bu geçişleri yumuşat, animasyon takılıyor" |
 | `design-system` | Design system inşası: semantik token'lar, tema (dark mode token swap), primitive-first mimari, variant API'ları, headless a11y | "design system kur, dark mode altyapısı ekle" |
