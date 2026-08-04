@@ -54,6 +54,7 @@ Lokal kurulum (geliştirme için):
 |---|---|---|
 | `game-design` | Koddan önce oyun tasarımı: core loop, tek sayfalık GDD, acımasız MVP kapsamı, zorluk/ilerleme eğrileri, ekonomi, playtest | "oyun fikrim var, tasarlayalım" |
 | `pixel-game-dev` | Web teknolojileriyle 2D pixel art oyun geliştirme: framework seçimi, pixel-perfect render, asset pipeline, juice, yayınlama | "phaser ile bir platformer yapalım" |
+| `pixel-art-assets` | İnsan eli değmiş gibi duran pixel art asset üretimi: style bible, hue-shift'li ramp'ler, üç üretim rotası (el/script/diffusion-kurtarma), gömülü px.py aracı (palet kilidi, denetim, contact sheet) | "ai ile asset üret ama insan çizmiş gibi dursun" |
 | `godot-dev` | Godot 4 geliştirme: sahne kompozisyonu, signals-up/calls-down, typed GDScript, Resource'lar, fizik/input, export; Godot MCP entegrasyonu | "godot'ta envanter sistemi kur" |
 | `tauri-game-dev` | React + Tailwind + Tauri v2 ile masaüstü (ve mobil) oyun: üç katmanlı mimari, React↔canvas köprüsü, IPC/plugin'ler, platform-bazlı webview performans gerçekleri, Steam/itch dağıtımı | "tauri ile masaüstü oyunu yapalım" |
 | `multiplayer-netcode` | Web oyunları için multiplayer: türe göre model seçimi (snapshot interpolation, prediction/reconciliation, rollback), transport, authoritative server, determinizm tuzakları | "oyuna multiplayer ekle", "desync oluyor" |
