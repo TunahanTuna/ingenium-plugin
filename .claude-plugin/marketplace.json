@@ -8,7 +8,7 @@
   "plugins": [
     {
       "name": "ingenium",
-      "description": "The full Ingenium toolkit in a single plugin. Workflow: safe-merge, refactor-safe, release-prep, debug-detective. Project: project-onboard, docs-sync, web-kickoff. Frontend craft: frontend-craft, perf-audit, motion-craft, design-system, human-made-design, pwa-offline. Game dev: game-design, pixel-game-dev, pixel-art-assets, godot-dev, tauri-game-dev, multiplayer-netcode, shader-vfx, game-audio. All skills respond to both Turkish and English prompts.",
+      "description": "The full Ingenium toolkit in a single plugin. Orchestration: task-conductor (decomposes work briefs and routes each part to the right skill). Workflow: safe-merge, refactor-safe, release-prep, debug-detective. Project: project-onboard, docs-sync, web-kickoff. Frontend craft: frontend-craft, perf-audit, motion-craft, design-system, human-made-design, pwa-offline. Game dev: game-design, pixel-game-dev, pixel-art-assets, godot-dev, tauri-game-dev, multiplayer-netcode, shader-vfx, game-audio. All skills respond to both Turkish and English prompts.",
       "category": "development",
       "source": "./plugins/ingenium",
       "author": {

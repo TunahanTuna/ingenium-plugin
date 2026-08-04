@@ -20,6 +20,12 @@ Lokal kurulum (geliştirme için):
 
 ## Skill'ler
 
+### Orkestrasyon
+
+| Skill | Ne yapar | Örnek komut |
+|---|---|---|
+| `task-conductor` | Anlattığın işi (brief/user story) bölümlere ayırır, her bölüm için oturumdaki skill envanterinden en uygun skill'i tam zamanında yükler, bağımlılık sırasıyla yürütür, brief'e karşı doğrular; skill'i olmayan iş türlerini "ingenium adayı" olarak raporlar | "bize bir task geldi, şöyle şöyle olacak..." |
+
 ### Workflow
 
 | Skill | Ne yapar | Örnek komut |
