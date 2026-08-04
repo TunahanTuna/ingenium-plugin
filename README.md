@@ -88,7 +88,3 @@ Yeni skill eklemek:
 ## Sürümleme
 
 `plugin.json`'da bilinçli olarak `version` alanı yok: her commit otomatik olarak yeni sürüm sayılır (commit SHA bazlı). Push'ladığın her değişiklik, marketplace'i ekleyen kullanıcılara otomatik güncellemeyle ulaşır. Kararlı sürümler yayınlamak istersen `version` alanı ekleyip semver ile artırman yeterli — o durumda kullanıcılar yalnızca versiyon değişince güncelleme alır.
-
-## Deka plugin'leriyle birlikte kullanım
-
-Ingenium, Deka marketplace'indeki review/pattern odaklı skill'lerle çakışmayacak şekilde workflow odaklı tasarlandı. İkisi birlikte kurulu olabilir: örneğin React component review'u `deka-engineering-react` yapar, branch merge ve release akışını `ingenium` yönetir.
