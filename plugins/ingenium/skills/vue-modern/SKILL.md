@@ -1,17 +1,26 @@
 ---
 name: vue-modern
-description: Modern Vue and Nuxt, current as of August 2026 (Vue 3.5 stable, Vue 3.6 RC with Vapor Mode feature-complete, Nuxt 4.4) - script setup with typed reactive props destructure, defineModel, useTemplateRef, composable discipline, ref vs shallowRef choices, lazy hydration strategies, Vapor Mode adoption guidance, Pinia setup stores plus Pinia Colada for server data, Nuxt 4 app directory, useFetch/useAsyncData/$fetch rules, routeRules hybrid rendering, Nitro server routes and island components, plus a freshness protocol that verifies current versions before locking decisions. Use when building, upgrading or optimizing Vue or Nuxt apps, writing composables, choosing Vue state or data-fetching architecture, or asking about current Vue best practices. Türkçe tetikleyiciler - "vue'da en güncel yöntem", "vue 3.6 özellikleri", "vapor mode nedir", "nuxt projesi kur", "nuxt best practice", "composable nasıl yazılır", "vue projemi optimize et", "pinia mı vuex mu", "en güncel vue".
+description: Modern Vue and Nuxt, current as of August 2026 (Vue 3.5 stable, Vue 3.6 RC with Vapor Mode feature-complete, Nuxt 4.4) - script setup with typed reactive props destructure, defineModel, useTemplateRef, composable discipline, ref vs shallowRef choices, lazy hydration strategies, Vapor Mode adoption guidance, Pinia setup stores plus Pinia Colada for server data, Nuxt 4 app directory, useFetch/useAsyncData/$fetch rules, routeRules hybrid rendering, Nitro server routes and island components, plus a freshness protocol that verifies current versions before locking decisions. Carries an existing-codebase protocol for brownfield projects - detect Vue/Nuxt versions and API style, match the repo's paradigm, migrate only as an explicit opt-in. Use when building, upgrading or optimizing Vue or Nuxt apps, writing composables, choosing Vue state or data-fetching architecture, or asking about current Vue best practices. Türkçe tetikleyiciler - "vue'da en güncel yöntem", "eski vue projesinde çalış", "vue 2 projesi", "vue 3.6 özellikleri", "vapor mode nedir", "nuxt projesi kur", "nuxt best practice", "composable nasıl yazılır", "vue projemi optimize et", "pinia mı vuex mu", "en güncel vue".
 ---
 
 # Vue Modern (2026)
 
-You build Vue the way it works *now*: `<script setup>` + TypeScript everywhere, composables as the reuse unit, fine-grained reactivity used deliberately, and Nuxt 4 as the full-stack default. Options API is legacy for new code.
+You build Vue the way it works *now*: `<script setup>` + TypeScript everywhere, composables as the reuse unit, fine-grained reactivity used deliberately, and Nuxt 4 as the full-stack default. Options API is legacy for new code — but existing codebases are governed by the brownfield protocol below, not by this skill's preferences.
 
 Always communicate with the user in their own language.
 
 ## Freshness protocol
 
 Knowledge here is current as of **August 2026**: Vue 3.5 stable; **Vue 3.6 in RC** (Vapor Mode feature-complete, alien-signals reactivity refactor; stable expected autumn 2026); Nuxt 4.4 (Vue Router 5, typed layout props); Pinia Colada 1.4. Before locking versions on a new project or upgrade, verify at blog.vuejs.org and nuxt.com/blog — if 3.6 has gone stable or newer majors exist, reality wins and say so.
+
+## Existing codebase protocol (brownfield safety — read before touching an old project)
+
+Everything modern in this skill targets **new code and greenfield decisions**. An existing project is governed by what it already is:
+
+- **Detect reality first**: Vue major from package.json (Vue 2 is a different world — different APIs, different ecosystem), Nuxt version (2/3/4 differ in structure and data-fetching APIs), API style from the code (Options vs Composition, `<script setup>` or not), the state library actually in use.
+- **Consistency beats modernity inside a codebase.** In an Options API codebase, new components are Options API unless migration is explicitly the task; no `<script setup>` islands, no Vapor experiments in a production brownfield uninvited.
+- **Feature-gate by installed version**: `defineModel` needs 3.4+, reactive props destructure 3.5+, lazy hydration strategies 3.5+, Vapor 3.6+ — never emit code the installed version cannot run.
+- **Migration is a proposal, never a side effect.** If moving to Composition API / Nuxt 4 / Vapor would genuinely pay, propose it separately — scope, win, risk, path — and execute through the refactor-safe skill, incrementally. Never mix paradigms in one feature PR uninvited.
 
 ## Modern SFC baseline (every new component)
 

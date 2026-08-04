@@ -1,17 +1,26 @@
 ---
 name: react-modern
-description: Modern React and its frameworks, current as of August 2026 (React 19.2, React Compiler 1.0, Next.js 16) - server-first mental model with Server Components, Actions/useActionState/useOptimistic forms, use() for async, Compiler instead of manual memoization, framework selection (Next.js 16 vs React Router 7 framework mode vs TanStack Start v1 vs Vite SPA), Next.js 16 Cache Components with stable PPR and Turbopack, plus a stale-habit anti-pattern list and a freshness protocol that verifies current versions before locking decisions. Use when building, upgrading or optimizing React or Next.js apps, choosing a React framework or asking about current React best practices. Türkçe tetikleyiciler - "react'ta en güncel yöntem", "react 19 özellikleri", "next.js projesi kur", "next.js best practice", "server component nasıl kullanılır", "react compiler", "react projemi optimize et", "hangi react framework'ü", "en güncel react".
+description: Modern React and its frameworks, current as of August 2026 (React 19.2, React Compiler 1.0, Next.js 16) - server-first mental model with Server Components, Actions/useActionState/useOptimistic forms, use() for async, Compiler instead of manual memoization, framework selection (Next.js 16 vs React Router 7 framework mode vs TanStack Start v1 vs Vite SPA), Next.js 16 Cache Components with stable PPR and Turbopack, plus a stale-habit anti-pattern list and a freshness protocol that verifies current versions before locking decisions. Carries an existing-codebase protocol for brownfield projects - detect installed versions, match the repo's paradigm, modernize only as an explicit opt-in. Use when building, upgrading or optimizing React or Next.js apps, choosing a React framework or asking about current React best practices. Türkçe tetikleyiciler - "react'ta en güncel yöntem", "eski react projesinde çalış", "react 19 özellikleri", "next.js projesi kur", "next.js best practice", "server component nasıl kullanılır", "react compiler", "react projemi optimize et", "hangi react framework'ü", "en güncel react".
 ---
 
 # React Modern (2026)
 
-You build React the way it works *now*, not the way tutorials taught it in 2022. The 2026 mental model: **server-first, compiler-optimized, actions-driven.** Old habits are the main source of bad modern React — this skill exists to replace them.
+You build React the way it works *now*, not the way tutorials taught it in 2022. The 2026 mental model: **server-first, compiler-optimized, actions-driven.** Old habits are the main source of bad modern React — this skill exists to replace them *in the code you write going forward*; existing codebases are protected by the brownfield protocol below.
 
 Always communicate with the user in their own language.
 
 ## Freshness protocol
 
 Knowledge here is current as of **August 2026**: React 19.2 (Compiler 1.0 stable since Oct 2025), Next.js 16.x (Turbopack default, Cache Components + PPR stable), React Router 7, TanStack Start 1.0 (March 2026). Before locking framework/version decisions on a new project or upgrade, verify the current state at react.dev/blog and nextjs.org/blog — if reality has moved past this skill, reality wins and say so.
+
+## Existing codebase protocol (brownfield safety — read before touching an old project)
+
+The modern patterns in this skill describe **new code and greenfield decisions**. An existing project is governed by what it already is:
+
+- **Detect reality first**: React and framework versions from package.json and the lockfile; the paradigm from the code itself (class components? Pages Router? Redux? CRA?). Five minutes of reading beats one wrong assumption.
+- **Consistency beats modernity inside a codebase.** New code follows the repo's existing patterns — an Actions-and-RSC island pasted into a Pages Router app, or hooks idioms scattered through a class-component codebase, is a maintenance wound, not an upgrade.
+- **Feature-gate by installed version**: no `use()`/Actions below React 19, no `"use cache"`/PPR below Next 16, Compiler adoption is a project decision (supports back to 17, but opt-in) — never emit code the installed versions cannot run.
+- **Modernization is a proposal, never a side effect.** If upgrading would genuinely pay, say so separately — scope, win, risk, migration path — and execute it through the refactor-safe skill (behavior-preserving, incremental). Never modernize in passing while delivering a feature.
 
 ## Stale habit → modern replacement (the core table)
 
