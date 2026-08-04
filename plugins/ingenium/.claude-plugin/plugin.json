@@ -1,6 +1,6 @@
 {
   "name": "ingenium",
-  "description": "Developer Swiss Army knife for frontend and game developers: task orchestration (brief decomposition with automatic skill routing), safe merging, safe refactoring, systematic debugging, docs sync, AI-ready onboarding, release prep, web kickoff, frontend fundamentals, UI/UX design methodology (tables, forms, dashboards, game HUD), performance auditing, motion engineering, design systems, human-made (anti-generic) design, PWA/offline, game design, pixel-art web games, pixel art asset production, Godot 4, Tauri desktop games, multiplayer netcode, shaders/VFX and game audio. Bilingual (EN/TR) triggers.",
+  "description": "Developer Swiss Army knife for frontend and game developers: task orchestration (brief decomposition with automatic skill routing), safe merging, safe refactoring, systematic debugging, docs sync, AI-ready onboarding, release prep, web kickoff, frontend fundamentals, UI/UX design methodology (tables, forms, dashboards, game HUD), modern React 19/Next.js 16 and Vue 3.6/Nuxt 4 best practices, performance auditing, motion engineering, design systems, human-made (anti-generic) design, PWA/offline, game design, pixel-art web games, pixel art asset production, Godot 4, Tauri desktop games, multiplayer netcode, shaders/VFX and game audio. Bilingual (EN/TR) triggers.",
   "author": {
     "name": "Tunahan"
   },
@@ -30,6 +30,10 @@
     "offline-first",
     "ui-design",
     "ui-ux",
-    "ux"
+    "ux",
+    "react",
+    "nextjs",
+    "vue",
+    "nuxt"
   ]
 }
