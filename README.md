@@ -7,7 +7,7 @@ Tek plugin, tüm skill'ler: `ingenium`'u kurduğunda her şey birlikte gelir. T�
 ## Kurulum
 
 ```
-/plugin marketplace add <github-kullanici>/ingenium
+/plugin marketplace add TunahanTuna/ingenium-plugin
 /plugin install ingenium@ingenium
 ```
 
