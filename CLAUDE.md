@@ -7,7 +7,7 @@ Tek plugin'li marketplace repo'su. Plugin: `plugins/ingenium/`, skill'ler: `plug
 - Doğrulama: `claude plugin validate .` (marketplace) ve `claude plugin validate plugins/ingenium` (plugin)
 - Kurulumsuz test: `claude --plugin-dir plugins/ingenium` → oturumda `/reload-plugins`
 - Marketplace testi: `/plugin marketplace add <repo-yolu>` → `/plugin install ingenium@ingenium`
-- Skill düzenledikten sonra kurulu kopyayı tazeleme: sürüm commit SHA'sından türediği için önce commit gerekir; sonra `claude plugin marketplace update ingenium`. Commit yoksa updater değişikliği görmez — o durumda `claude plugin uninstall ingenium@ingenium` + `claude plugin install ingenium@ingenium`
+- Skill düzenledikten sonra kurulu kopyayı tazeleme: marketplace GitHub kaynaklı (TunahanTuna/ingenium-plugin), sürüm commit SHA'sından türer — **commit + push** gerekir; sonra `claude plugin marketplace update ingenium`. Push'lamadan hızlı deneme: `claude --plugin-dir plugins/ingenium`
 
 ## Yapı
 

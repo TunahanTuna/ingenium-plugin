@@ -82,8 +82,8 @@ Yeni skill eklemek:
 1. `plugins/ingenium/skills/<skill-adi>/SKILL.md` oluştur — frontmatter'da `name` ve `description` zorunlu.
 2. `description` alanına İngilizce tanımın sonuna `Türkçe tetikleyiciler - "..."` listesini ekle; Claude'un tetikleme kararı yalnızca bu alana bakar.
 3. Doğrula: `claude plugin validate .`
-4. Kurulu kopyayı tazele: sürümleme commit SHA'sına bağlı olduğu için önce **commit'le**, sonra `/plugin marketplace update ingenium` çalıştır (yeni oturumda etkinleşir). Commit'lemeden denemek istersen: `claude plugin uninstall ingenium@ingenium && claude plugin install ingenium@ingenium`.
-5. Alternatif — kurulum yapmadan hızlı deneme: `claude --plugin-dir plugins/ingenium` (`/reload-plugins` ile anında yenile).
+4. Yayınla: marketplace GitHub kaynaklı olduğu için **commit + push** yap, sonra `/plugin marketplace update ingenium` çalıştır (yeni oturumda etkinleşir; diğer kullanıcılar otomatik güncellemeyle alır).
+5. Push'lamadan hızlı deneme: `claude --plugin-dir plugins/ingenium` (`/reload-plugins` ile anında yenile).
 
 ## Sürümleme
 
