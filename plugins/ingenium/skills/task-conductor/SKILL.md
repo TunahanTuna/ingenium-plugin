@@ -1,6 +1,6 @@
 ---
 name: task-conductor
-description: Orchestrate multi-part work briefs end to end by decomposing them and loading the right skill for each part - when the user describes a task, user story or feature request spanning multiple concerns (UI plus data plus tests, design plus implementation plus release), parse the brief, split it into ordered workstreams, map each to the best-matching skill from the session's live skill inventory, load skills just-in-time, execute movement by movement and verify against the brief. Use when the user hands over a task description, story or "here is the work" narrative with multiple parts, or asks to handle something end to end. Not for single-step questions or one-line fixes. Türkçe tetikleyiciler - "bize bir task geldi", "iş şu şekilde", "görev şu", "yapılacaklar şunlar", "şöyle bir talep var", "hikayesi şu", "task'ı anlatıyorum", "uçtan uca hallet", "gerekli skilleri kullanarak yap".
+description: Orchestrate multi-part work briefs end to end by decomposing them and loading the right skill for each part - when the user describes a task, user story or feature request spanning multiple concerns (UI plus data plus tests, design plus implementation plus release), parse the brief, split it into ordered workstreams, map each to the best-matching skill from the session's live skill inventory, load skills just-in-time, execute movement by movement under a strict code contract (codebase conformance, SOLID, zero comments, anti-spaghetti decomposition) and verify against the brief. Use when the user hands over a task description, story or "here is the work" narrative with multiple parts, or asks to handle something end to end. Not for single-step questions or one-line fixes. Türkçe tetikleyiciler - "bize bir task geldi", "iş şu şekilde", "görev şu", "yapılacaklar şunlar", "şöyle bir talep var", "hikayesi şu", "task'ı anlatıyorum", "uçtan uca hallet", "gerekli skilleri kullanarak yap".
 argument-hint: "[task açıklaması]"
 ---
 
@@ -18,6 +18,7 @@ Always communicate with the user in their own language.
 4. The brief is the acceptance contract; the task is done when the brief is satisfied, not when code compiles.
 5. Ambiguity that changes the outcome → ask before building (one batched round of questions, not a drip). Ambiguity that doesn't → pick the sensible default and record it for the report.
 6. Nothing in the brief gets silently dropped. Can't do a part? Say so in the plan, not in the postmortem.
+7. Every line of code produced in any workstream falls under the **Code Contract** below — regardless of which skill is loaded. The contract is the floor; loaded skills build on it, never under it.
 
 ## Phase 1 — Parse the brief
 
@@ -57,9 +58,24 @@ For each workstream in dependency order:
 
 Use the harness task list (TaskCreate/TaskUpdate) when there are 3+ workstreams so progress is visible. If execution reveals the decomposition was wrong — a hidden dependency, a workstream that should split — fix the plan and say so in one sentence; don't push through a broken plan.
 
+## The Code Contract (every line, every workstream, no exceptions)
+
+Workstreams may route to different skills, but all code written under this conductor obeys one contract:
+
+1. **Codebase conformance first.** Before writing a line, read the neighboring and similar code in the repo; extract its naming, file placement, import style, state patterns and idioms. New code must read as if the codebase's own author wrote it. When the repo's convention conflicts with a general best practice, the repo wins — consistency beats preference. A genuinely harmful convention gets raised as its own proposed workstream, never silently "fixed" in passing.
+2. **Zero comments.** Code communicates through names, types and structure: rename, extract a well-named function, or introduce a type instead of explaining in prose. The lone tolerated exception is an externally-imposed constraint impossible to express in code (a documented upstream bug workaround); everything else self-documents.
+3. **Anti-spaghetti by construction — böl, parçala, yönet:**
+   - Single responsibility per unit, one reason to change. God files and god functions are defects: functions readable without scrolling, files focused (roughly ≤300 lines — split *before* they grow past it).
+   - Explicit component relationships: data flows down (props/parameters), events and results flow up; siblings never reach into each other; shared state lives at the lowest sufficient level. No reach-arounds, no hidden globals.
+   - One-way dependency direction between layers (UI → logic → data); a lower layer never imports from a higher one; a cyclic import is a stop-and-fix signal, not a warning to ignore.
+   - Composition over inheritance and over configuration flags. Duplication is cheaper than the wrong abstraction — extract on the second real duplication, not speculatively.
+4. **SOLID, operationally:** SRP — one job per module/component. OCP — add variants by adding code (a new strategy, a new component), not by growing another if-branch inside stable code. LSP — anything claiming a contract honors all of it (no throws-NotImplemented subtypes). ISP — small, focused interfaces and prop sets; no 20-prop do-everything components. DIP — boundaries depend on abstractions: inject the client/repository; business logic never hard-codes I/O details.
+5. **Proportionality.** The ceremony scales with blast radius: core modules get the full treatment; a throwaway script gets clean naming and small functions, not an interface hierarchy. SOLID is a discipline, not enterprise theater.
+
 ## Phase 5 — Verify against the brief, then report
 
 - Walk the Phase 1 acceptance criteria one by one: **met / not met / consciously changed** (with the reason).
+- **Code Contract audit** on the full diff: zero comments, no unit past its size guardrail, dependencies flow one way, component relationships explicit, and the diff reads like the repo's own author wrote it.
 - **Integration check** — the parts must work *together*, not just in isolation: the new table renders on the real page with real data, in both themes, at mobile width; not merely in a component sandbox.
 - Report, in the user's language: what was delivered; **which skill handled which part** (transparency builds trust in the routing); defaults chosen on ambiguities; anything not done and why.
 - **Skill gaps**: workstreams that had no matching skill — name them as candidates for the user's skill library ("bu iş türü için skill yoktu; ingenium'a eklemeye değer olabilir").
@@ -77,4 +93,4 @@ Brief: *"Sayfaya yeni bir tablo eklenecek, olabildiğince güzel görünmeli."*
 
 ## Anti-patterns
 
-Loading every possibly-relevant skill upfront; skill theater (loading then ignoring); conducting a one-liner (a typo fix needs no orchestra); silently dropping brief items that turned out hard; declaring done without the integration check; asking questions one at a time across five messages.
+Loading every possibly-relevant skill upfront; skill theater (loading then ignoring); conducting a one-liner (a typo fix needs no orchestra); silently dropping brief items that turned out hard; declaring done without the integration check; asking questions one at a time across five messages; comment-splaining instead of naming; growing a god file because splitting felt like extra work.
