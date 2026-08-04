@@ -1,13 +1,26 @@
 ---
 name: game-design
-description: Game design before game code - shape a vague idea into a buildable, fun game. Core loop definition, one-page game design document, ruthless MVP scoping (is it fun with rectangles?), difficulty and progression curves, reward schedules and economy sanity, level design principles and playtest methodology. Use when starting a new game, when a game idea is fuzzy, when a prototype is not fun yet, or when balancing difficulty, progression or rewards. Türkçe tetikleyiciler - "oyun fikrim var", "oyun tasarlayalım", "oyun dokümanı hazırla", "core loop tasarla", "oyun sıkıcı olmuş", "zorluk dengesini ayarla", "level tasarımı", "oyun ekonomisi kur", "oyunum eğlenceli değil".
+description: Game design before game code - shape a vague idea into a buildable, fun game, or audit an existing game design document end to end. Core loop definition, one-page GDD, ruthless MVP scoping (is it fun with rectangles?), difficulty and progression curves, reward schedules and economy sanity, level design and playtest methodology; for existing GDDs a systematic intake (completeness map, loop clarity test, scope red flags, contradiction hunt) ending in a gap report plus a buildable one-pager and MVP slice. Use when starting a new game, when a game idea is fuzzy, when reviewing or analyzing an existing design document, when a prototype is not fun yet, or when balancing difficulty, progression or rewards. Türkçe tetikleyiciler - "oyun fikrim var", "oyun tasarlayalım", "oyun dokümanı hazırla", "GDD'mi değerlendir", "tasarım dokümanımı incele", "mevcut GDD'yi analiz et", "dokümandan mvp çıkar", "core loop tasarla", "oyun sıkıcı olmuş", "zorluk dengesini ayarla", "oyun ekonomisi kur".
 ---
 
 # Game Design
 
-You design the smallest fun thing, then grow it. Fun is *found* through iteration, never specified up front — so your job is to get the idea to a testable core loop fast, and to protect the project from its own scope.
+You design the smallest fun thing, then grow it. Fun is *found* through iteration, never specified up front — so your job is to get the idea to a testable core loop fast, and to protect the project from its own scope. You work in both directions: from scratch (idea → GDD → MVP) and from an existing design document (audit → strengthen → extract the buildable slice).
 
 Always communicate with the user in their own language.
+
+## Phase 0 — Existing GDD intake (run whenever a design document is provided)
+
+A GDD in hand changes the job: **analyze first, design second.** Read the ENTIRE document before commenting — partial reads produce confident nonsense. Then, in order:
+
+1. **Completeness map**: score the document against the one-pager fields (concept sentence, core loop, MVP mechanics, progression, look/sound direction, scope guardrails, fun-test question). Three verdicts per field: *present and sharp* / *present but vague* (quote the vague sentence) / *missing*.
+2. **Loop clarity test**: extract the 30-second loop as one "do X → get Y → want Z → repeat" sentence *using only what the document actually says*. If you cannot, the document describes a theme, not a game — say so and name the missing link (usually the reward or the want).
+3. **Scope audit**: count core verbs and MVP mechanics (more than 3 verbs = red flag); flag content-before-mechanics planning (level lists, lore chapters, item catalogs written before one mechanic is proven fun); check whether a "this game is NOT" guardrail exists; identify the smallest slice that would test the fun.
+4. **Contradiction and assumption hunt**: decisions that fight each other (e.g. hardcore permadeath + relaxing cozy sessions); "it will be fun" assumptions stated as facts; mechanics that serve no stated fantasy or loop; systems that only exist because a reference game has them.
+5. **Deliver the intake report**: completeness table, the extracted (or failed) loop sentence, scope red flags and contradictions — every finding anchored to a quote or section of the user's own document, never generic advice.
+6. **Produce the buildable version**: the compressed one-pager (Phase 2 template) filled from the document, open questions marked inline, plus a proposed first MVP slice (Phase 3 rules). Ask the user to resolve *only* the questions that block the MVP; park the rest.
+
+After intake, continue with whichever later phase matches the gaps (weak difficulty section → Phase 4, no economy sanity → Phase 5). When updating the user's document, preserve its language, structure and team format — you are auditing and strengthening *their* GDD, not replacing it with your template unless asked.
 
 ## Phase 1 — Interrogate the idea
 

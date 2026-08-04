@@ -52,7 +52,7 @@ Lokal kurulum (geliştirme için):
 
 | Skill | Ne yapar | Örnek komut |
 |---|---|---|
-| `game-design` | Koddan önce oyun tasarımı: core loop, tek sayfalık GDD, acımasız MVP kapsamı, zorluk/ilerleme eğrileri, ekonomi, playtest | "oyun fikrim var, tasarlayalım" |
+| `game-design` | Koddan önce oyun tasarımı: core loop, tek sayfalık GDD, acımasız MVP kapsamı, zorluk/ilerleme eğrileri, ekonomi, playtest; mevcut GDD verilirse sistematik intake (tamlık haritası, loop netlik testi, kapsam/çelişki denetimi) + gap raporu + buildable tek-sayfa | "oyun fikrim var" / "GDD'mi değerlendir" |
 | `pixel-game-dev` | Web teknolojileriyle 2D pixel art oyun geliştirme: framework seçimi, pixel-perfect render, asset pipeline, juice, yayınlama | "phaser ile bir platformer yapalım" |
 | `pixel-art-assets` | İnsan eli değmiş gibi duran pixel art asset üretimi: style bible, hue-shift'li ramp'ler, üç üretim rotası (el/script/diffusion-kurtarma), gömülü px.py aracı (palet kilidi, denetim, contact sheet) | "ai ile asset üret ama insan çizmiş gibi dursun" |
 | `godot-dev` | Godot 4 geliştirme: sahne kompozisyonu, signals-up/calls-down, typed GDScript, Resource'lar, fizik/input, export; Godot MCP entegrasyonu | "godot'ta envanter sistemi kur" |
