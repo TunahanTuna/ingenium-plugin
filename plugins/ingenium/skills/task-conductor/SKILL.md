@@ -53,10 +53,27 @@ For each workstream in dependency order:
 
 1. Load its skill(s) **now**, via the Skill tool.
 2. Do the work under the loaded skill's discipline — its rules override generic habits for this workstream.
-3. Run the workstream's done-check (build, tests, visual check at real size — whatever applies) before moving on.
+3. Run the workstream's done-check with the evidence ladder below before moving on.
 4. Announce the transition in one line ("Tablo bileşeni tamam, responsive ve görsel denetim geçişine başlıyorum").
 
 Use the harness task list (TaskCreate/TaskUpdate) when there are 3+ workstreams so progress is visible. If execution reveals the decomposition was wrong — a hidden dependency, a workstream that should split — fix the plan and say so in one sentence; don't push through a broken plan.
+
+## Verification policy — cheapest sufficient evidence, browser last
+
+Climb this ladder only as far as the claim requires, and stop:
+
+1. **Static proof** — typecheck and build pass; the *compiled output* actually contains what was claimed (grep the built CSS/JS for the selector, class or symbol — a green build is not proof a class was generated); lint clean.
+2. **Automated proof** — unit and component tests; the repo's existing headless E2E suite (`playwright test`) if one is already set up. Run them; quote the result.
+3. **Structural proof** — read the integration points and show the required states (loading, empty, error, both themes, responsive breakpoints) exist as reachable code paths in the diff.
+
+**Driving a headed browser through the Chrome extension is opt-in, never a routine done-check.** Do not open tabs, navigate, click or screenshot to verify your own work by default. Reach for it only when:
+
+- the user asks for it in this session ("tarayıcıda aç", "ekran görüntüsü al", "canlı gör", "gözle kontrol et"), **or**
+- an acceptance criterion genuinely cannot be settled by the three rungs above — in which case name the criterion and ask first, rather than opening a browser and reporting afterwards.
+
+Setting up browser automation, a new E2E harness or a screenshot pipeline that the repo does not already have is its own workstream requiring a nod — never a side effect of verifying something else.
+
+When a visual criterion ends up unverified because no browser was used, report it as **unverified** in Phase 5. An honestly labelled gap costs the user less than an unrequested browser session, and far less than a claim dressed up as a check.
 
 ## The Code Contract (every line, every workstream, no exceptions)
 
@@ -76,7 +93,7 @@ Workstreams may route to different skills, but all code written under this condu
 
 - Walk the Phase 1 acceptance criteria one by one: **met / not met / consciously changed** (with the reason).
 - **Code Contract audit** on the full diff: zero comments, no unit past its size guardrail, dependencies flow one way, component relationships explicit, and the diff reads like the repo's own author wrote it.
-- **Integration check** — the parts must work *together*, not just in isolation: the new table renders on the real page with real data, in both themes, at mobile width; not merely in a component sandbox.
+- **Integration check** — the parts must work *together*, not just in isolation: the new table is wired into the real page with real data, in both themes, at mobile width; not merely a component in a sandbox. Settle it with the evidence ladder — imports and props traced end to end, tests over the composed page, responsive and theme paths present in the diff. What the ladder cannot reach is reported unverified, not browsed for uninvited.
 - Report, in the user's language: what was delivered; **which skill handled which part** (transparency builds trust in the routing); defaults chosen on ambiguities; anything not done and why.
 - **Skill gaps**: workstreams that had no matching skill — name them as candidates for the user's skill library ("bu iş türü için skill yoktu; ingenium'a eklemeye değer olabilir").
 
@@ -93,4 +110,4 @@ Brief: *"Sayfaya yeni bir tablo eklenecek, olabildiğince güzel görünmeli."*
 
 ## Anti-patterns
 
-Loading every possibly-relevant skill upfront; skill theater (loading then ignoring); conducting a one-liner (a typo fix needs no orchestra); silently dropping brief items that turned out hard; declaring done without the integration check; asking questions one at a time across five messages; comment-splaining instead of naming; growing a god file because splitting felt like extra work.
+Loading every possibly-relevant skill upfront; skill theater (loading then ignoring); conducting a one-liner (a typo fix needs no orchestra); silently dropping brief items that turned out hard; declaring done without the integration check; opening a headed browser as a reflex when a build, a grep of the compiled output or an existing test would settle it; standing up an E2E or screenshot pipeline nobody asked for; asking questions one at a time across five messages; comment-splaining instead of naming; growing a god file because splitting felt like extra work.
