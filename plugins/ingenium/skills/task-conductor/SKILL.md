@@ -1,6 +1,6 @@
 ---
 name: task-conductor
-description: Orchestrate multi-part work briefs end to end by decomposing them and loading the right skill for each part - when the user describes a task, user story or feature request spanning multiple concerns (UI plus data plus tests, design plus implementation plus release), parse the brief, split it into ordered workstreams, map each to the best-matching skill from the session's live skill inventory, load skills just-in-time, execute movement by movement under a strict code contract (codebase conformance, SOLID, zero comments, anti-spaghetti decomposition) and verify against the brief. Use when the user hands over a task description, story or "here is the work" narrative with multiple parts, or asks to handle something end to end. Not for single-step questions or one-line fixes. Türkçe tetikleyiciler - "bize bir task geldi", "iş şu şekilde", "görev şu", "yapılacaklar şunlar", "şöyle bir talep var", "hikayesi şu", "task'ı anlatıyorum", "uçtan uca hallet", "gerekli skilleri kullanarak yap".
+description: Orchestrate multi-part work briefs end to end by decomposing them and loading the right skill for each part - when the user describes a task, user story or feature request spanning multiple concerns (UI plus data plus tests, design plus implementation plus release), parse the brief, split it into ordered workstreams, map each to the best-matching skill from the session's live skill inventory, load skills just-in-time, execute movement by movement under a strict code contract (codebase conformance, SOLID, zero comments, anti-spaghetti decomposition) and verify against the brief. Includes a fullstack slicing pass - trace the work through database, backend and frontend, agree the API contract before either side is built, and order the slice data to contract to backend to frontend to integration. Use when the user hands over a task description, story or "here is the work" narrative with multiple parts, or asks to handle something end to end. Not for single-step questions or one-line fixes. Türkçe tetikleyiciler - "bize bir task geldi", "iş şu şekilde", "görev şu", "yapılacaklar şunlar", "şöyle bir talep var", "hikayesi şu", "task'ı anlatıyorum", "uçtan uca hallet", "gerekli skilleri kullanarak yap", "backend frontend ayır", "uçtan uca tasarla".
 argument-hint: "[task açıklaması]"
 ---
 
@@ -38,6 +38,39 @@ Restate the task in 2–3 sentences in the user's language. If a critical fork i
 - Each workstream gets: a goal, its inputs, and a **done-check** (how you'll know it's finished).
 - Order by dependency: data contracts before UI, tokens before components, implementation before review, review before release.
 - Right-size it: 2–6 workstreams is typical. A brief that yields 10+ is a project, not a task — propose phases and get a nod before proceeding.
+
+## Phase 2b — Fullstack slicing (whenever the brief crosses layers)
+
+Most real briefs are one vertical slice through database, backend and frontend, described from whichever end the requester happens to see. Before mapping skills, cut the slice properly — a slice split by layer *without* a contract between the layers is how frontend and backend meet at integration and discover they built different things.
+
+**Locate the slice in the existing system first.** Never design from the brief alone:
+
+- **Frontend-first briefs** ("bu ekranda şu alan da görünsün"): find the component, then the hook or service it calls, then the HTTP client method, then the endpoint, then the handler, then the query, then the tables. Follow the chain in the repo and write down each hop. The brief's real cost lives at the deepest hop it reaches.
+- **Backend-first briefs** ("şu alanı da dönelim"): find the endpoint and its response type, then every frontend consumer of that field or type. A response shape has consumers; changing it without finding them is how a page silently breaks.
+- **Data-first briefs** ("şu bilgiyi de tutalım"): find the table, its entities/models, every query that projects it, and every DTO that carries it upward.
+
+**Then define the contract before building either side.** The contract is the deliverable that unblocks parallel work:
+
+- Endpoint (method, path, status codes), request shape, response shape, error shape, pagination and filtering semantics, auth requirement.
+- Field names, types, nullability and units, agreed once — in the API's language, not the database's. A column rename must not become a frontend change.
+- Write it where the repo already keeps contracts (an OpenAPI file, a shared types package, a Zod schema module, the DTO records). If the repo has no such place, the response DTO plus the frontend type are the contract; keep them in sync deliberately and say so.
+
+**Order the slice by dependency, not by visibility:**
+
+1. **Data** — schema and migration (db-schema-craft), because everything above it is shaped by it and it is the hardest thing to change later.
+2. **Contract** — the API shape, stated explicitly and agreed before code on either side.
+3. **Backend** — persistence, domain logic, endpoint (java-backend / dotnet-backend / node-backend, whichever the repo is), with the query cost considered as it is written (query-tuning).
+4. **Frontend** — service/client layer against the contract first, then state, then UI (the repo's framework skill, then frontend-craft and the design skills as the brief's constraints demand).
+5. **Integration** — the real page against the real endpoint against the real data.
+
+Deviations from this order are fine when justified: a frontend can be built against the agreed contract with a stub while the backend is written — but only *after* the contract exists, never instead of it.
+
+**Slice discipline:**
+
+- A layer is only in scope if the brief actually needs it. Not every task is fullstack; adding a backend workstream to a pure styling change is scope inflation.
+- **Never invent a layer to avoid touching another.** Computing in the frontend a value the backend should return, or storing a denormalized copy to dodge a join, is a decision that needs saying out loud — not a shortcut taken quietly.
+- Each layer's workstream carries its own done-check: migration applied and reversible; endpoint returning the contract shape with its error cases; frontend rendering loading, empty and error states from the real response.
+- **Say what the contract change breaks.** An existing endpoint's response shape, a shared type, a database column — list the other consumers you found, in the plan, before writing code.
 
 ## Phase 3 — Map skills to workstreams
 
@@ -108,6 +141,17 @@ Brief: *"Sayfaya yeni bir tablo eklenecek, olabildiğince güzel görünmeli."*
 | 3 | Visual craft pass (tokens, typography, de-genericize) | design-system + human-made-design |
 | 4 | Integrate + verify (real data on the real page, loading/empty/error, mobile, both themes) | conductor's own done-check |
 
+Brief: *"Sipariş detayında kargo takip numarası da görünsün."* — a frontend-shaped sentence that is actually a full vertical slice:
+
+| # | Workstream | Skill(s) |
+|---|---|---|
+| 0 | Trace the slice: component → hook → client method → endpoint → handler → query → table. Report which hops are missing | conductor (Phase 2b) |
+| 1 | Column plus migration for the tracking number, nullable, expand/contract safe | db-schema-craft |
+| 2 | Contract: the field added to the order-detail response DTO, type and nullability agreed | conductor (Phase 2b) |
+| 3 | Persistence, mapping and endpoint change; verify the read did not gain a join it cannot afford | the repo's backend skill + query-tuning |
+| 4 | Client type and service layer against the contract, then the UI, with an empty state for "not shipped yet" | the repo's frontend framework skill + frontend-craft |
+| 5 | Integrate + verify end to end against the real endpoint | conductor's own done-check |
+
 ## Anti-patterns
 
-Loading every possibly-relevant skill upfront; skill theater (loading then ignoring); conducting a one-liner (a typo fix needs no orchestra); silently dropping brief items that turned out hard; declaring done without the integration check; opening a headed browser as a reflex when a build, a grep of the compiled output or an existing test would settle it; standing up an E2E or screenshot pipeline nobody asked for; asking questions one at a time across five messages; comment-splaining instead of naming; growing a god file because splitting felt like extra work.
+Building both sides of a slice before the contract is agreed; changing a response shape without finding its other consumers; splitting a brief by layer and calling that a plan; treating a frontend-worded brief as a frontend-only task without tracing it down to the query; loading every possibly-relevant skill upfront; skill theater (loading then ignoring); conducting a one-liner (a typo fix needs no orchestra); silently dropping brief items that turned out hard; declaring done without the integration check; opening a headed browser as a reflex when a build, a grep of the compiled output or an existing test would settle it; standing up an E2E or screenshot pipeline nobody asked for; asking questions one at a time across five messages; comment-splaining instead of naming; growing a god file because splitting felt like extra work.

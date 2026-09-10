@@ -1,6 +1,6 @@
 {
   "name": "ingenium",
-  "description": "Developer Swiss Army knife for frontend and game developers: task orchestration (brief decomposition with automatic skill routing), safe merging, safe refactoring, systematic debugging, docs sync, AI-ready onboarding, release prep, web kickoff, frontend fundamentals, UI/UX design methodology (tables, forms, dashboards, game HUD), modern React 19/Next.js 16 and Vue 3.6/Nuxt 4 best practices, performance auditing, motion engineering, design systems, human-made (anti-generic) design, PWA/offline, game design, pixel-art web games, pixel art asset production, Godot 4, Tauri desktop games, multiplayer netcode, shaders/VFX and game audio. Bilingual (EN/TR) triggers.",
+  "description": "Developer Swiss Army knife for frontend and game developers: task orchestration (brief decomposition with automatic skill routing), safe merging, safe refactoring, systematic debugging, docs sync, AI-ready onboarding, release prep, web kickoff, frontend fundamentals, UI/UX design methodology (tables, forms, dashboards, game HUD), modern React 19/Next.js 16 and Vue 3.6/Nuxt 4 best practices, performance auditing, motion engineering, design systems, human-made (anti-generic) design, PWA/offline, game design, pixel-art web games, pixel art asset production, Godot 4, Tauri desktop games, multiplayer netcode, shaders/VFX and game audio. Backend engineering for Java/Spring Boot, .NET/ASP.NET Core and Node/NestJS, plus relational schema design and query tuning. Bilingual (EN/TR) triggers.",
   "author": {
     "name": "Tunahan"
   },
@@ -34,6 +34,21 @@
     "react",
     "nextjs",
     "vue",
-    "nuxt"
+    "nuxt",
+    "java",
+    "spring-boot",
+    "dotnet",
+    "aspnet",
+    "csharp",
+    "nodejs",
+    "nestjs",
+    "express",
+    "fastify",
+    "backend",
+    "database",
+    "sql",
+    "orm",
+    "query-optimization",
+    "schema-design"
   ]
 }
